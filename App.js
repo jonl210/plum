@@ -8,7 +8,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <HomeStack />
-        <StatusBar style="inverted" />
+        <StatusBar />
       </NavigationContainer>
     </SafeAreaProvider>
   );
