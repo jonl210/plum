@@ -12,7 +12,9 @@ const Home = () => {
   return (
     <View style={{ flex: 1, backgroundColor: "#29323a" }}>
       <ScrollView contentContainerStyle={styles.container}>
-        <Timer />
+        <View style={{ marginBottom: 25 }}>
+          <Timer />
+        </View>
         <TimerButton />
         <TouchableOpacity style={{ marginTop: 21 }}>
           <Text style={styles.editFast}>Edit Fast</Text>
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  editFast: { fontSize: 16, fontWeight: "500", color: "#fff" },
+  editFast: { fontSize: 16, fontWeight: "600", color: "#fff" },
 });
 
 export default Home;
