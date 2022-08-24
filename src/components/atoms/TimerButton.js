@@ -7,7 +7,7 @@ const TimerButton = ({ pressed, setPressed }) => {
       onPress={() => setPressed(!pressed)}
     >
       <Text style={styles.text}>
-        {pressed ? "Your fasting!" : "Start timer"}
+        {pressed ? "Your Fasting!" : "Start Fast"}
       </Text>
     </TouchableOpacity>
   );

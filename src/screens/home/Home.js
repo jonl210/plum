@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useState } from "react";
 import {
   ScrollView,
@@ -6,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Timer from "../../components/atoms/Timer";
 import TimerButton from "../../components/atoms/TimerButton";
 
 const Home = () => {
@@ -13,10 +15,13 @@ const Home = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#29323a" }}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={{ marginBottom: 21 }}>
+          <Timer />
+        </View>
         <TimerButton pressed={pressed} setPressed={setPressed} />
         <TouchableOpacity style={{ marginTop: 21 }}>
-          <Text style={styles.editFast}>Edit Fast</Text>
+          <Text style={styles.editFast}>Edit fast</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -24,7 +29,7 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  scrollContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
