@@ -1,13 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const TimerButton = ({ pressed, setPressed }) => {
+const TimerButton = ({ press, fasting }) => {
   return (
     <TouchableOpacity
-      style={[styles.button, pressed ? styles.pressed : null]}
-      onPress={() => setPressed(!pressed)}
+      style={[styles.button, fasting == "true" ? styles.fasting : null]}
+      onPress={() => press()}
     >
       <Text style={styles.text}>
-        {pressed ? "Your Fasting!" : "Start Fast"}
+        {fasting == "true" ? "You're Fasting!" : "Start Fast"}
       </Text>
     </TouchableOpacity>
   );
@@ -16,7 +16,7 @@ const TimerButton = ({ pressed, setPressed }) => {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "#d3869b",
-    paddingHorizontal: 34,
+    paddingHorizontal: 45,
     paddingVertical: 14,
     borderWidth: 2,
     borderColor: "#d3869b",
@@ -25,10 +25,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 1 },
   },
-  pressed: {
+  fasting: {
     backgroundColor: "#29323a",
+    paddingHorizontal: 27,
   },
-  text: { color: "#fff", fontSize: 17, fontWeight: "600" },
+  text: {
+    color: "#fff",
+    fontSize: 17,
+    fontWeight: "600",
+  },
 });
 
 export default TimerButton;

@@ -1,5 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -11,17 +12,43 @@ import Timer from "../../components/atoms/Timer";
 import TimerButton from "../../components/atoms/TimerButton";
 
 const Home = () => {
-  const [pressed, setPressed] = useState(false);
+  const [fasting, setFasting] = useState("");
+
+  useEffect(() => {
+    setInitialFastValue();
+  }, []);
+
+  const timerButtonPressed = () => {
+    if (fasting == "true") {
+      setNewFastValue("false");
+    } else {
+      setNewFastValue("true");
+    }
+  };
+
+  const setInitialFastValue = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@is_fasting");
+      setFasting(value);
+    } catch (error) {}
+  };
+
+  const setNewFastValue = async (value) => {
+    try {
+      await AsyncStorage.setItem("@is_fasting", value);
+      setFasting(value);
+    } catch (error) {}
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: "#29323a" }}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={{ marginBottom: 21 }}>
+        <View style={{ marginBottom: 40 }}>
           <Timer />
         </View>
-        <TimerButton pressed={pressed} setPressed={setPressed} />
+        <TimerButton press={timerButtonPressed} fasting={fasting} />
         <TouchableOpacity style={{ marginTop: 21 }}>
-          <Text style={styles.editFast}>Edit fast</Text>
+          <Text style={styles.editFast}>Edit Fast</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

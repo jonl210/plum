@@ -1,41 +1,20 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { getRemainingTimeUntilMsTimestamp } from "../../utils/CountdownTimerUtils";
+import { StyleSheet, Text, View } from "react-native";
 
-const defaultRemainingTime = {
-  seconds: "00",
-  minutes: "00",
-  hours: "00",
-};
-
-const Timer = ({ countdownTimestampMs }) => {
-  const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     updateRemainingTime(countdownTimestampMs);
-  //   }, 1000);
-  //   return () => clearInterval(intervalId);
-  // }, [countdownTimestampMs]);
-
-  const updateRemainingTime = (countdown) => {
-    setRemainingTime(getRemainingTimeUntilMsTimestamp(countdown));
-  };
-
+const Timer = () => {
   return (
-    <View style={{ flexDirection: "row" }}>
-      <Text style={styles.number}>{remainingTime.hours}</Text>
-      <Text style={styles.number}>{remainingTime.minutes}</Text>
-      <Text style={styles.number}>{remainingTime.seconds}</Text>
+    <View>
+      <Text style={styles.fastHour}>16hr</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  number: {
+  fastHour: {
     color: "#fff",
-    fontSize: 30,
+    fontSize: 45,
     marginRight: 5,
   },
 });
