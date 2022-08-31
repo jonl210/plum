@@ -15,28 +15,26 @@ const Home = () => {
   const [fasting, setFasting] = useState("");
 
   useEffect(() => {
-    setInitialFastValue();
+    setFastingValue();
   }, []);
 
   const timerButtonPressed = () => {
     if (fasting == "true") {
-      setNewFastValue("false");
+      setFastingValue("false");
     } else {
-      setNewFastValue("true");
+      setFastingValue("true");
     }
   };
 
-  const setInitialFastValue = async () => {
+  const setFastingValue = async (value) => {
     try {
-      const value = await AsyncStorage.getItem("@is_fasting");
-      setFasting(value);
-    } catch (error) {}
-  };
-
-  const setNewFastValue = async (value) => {
-    try {
-      await AsyncStorage.setItem("@is_fasting", value);
-      setFasting(value);
+      if (value) {
+        await AsyncStorage.setItem("@is_fasting", value);
+        setFasting(value);
+      } else {
+        const asyncValue = await AsyncStorage.getItem("@is_fasting");
+        setFasting(asyncValue);
+      }
     } catch (error) {}
   };
 
