@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import {
+  Alert,
   ScrollView,
   StyleSheet,
   Text,
@@ -13,16 +14,21 @@ import TimerButton from "../../components/atoms/TimerButton";
 
 const Home = () => {
   const [fasting, setFasting] = useState("");
+  const [fastDate, setFastDate] = useState("");
 
   useEffect(() => {
     setFastingValue();
+    checkForFast();
   }, []);
 
   const timerButtonPressed = () => {
-    if (fasting == "true") {
-      setFastingValue("false");
-    } else {
+    if (fasting == "false") {
+      const fast = dayjs().add(16, "hours");
+      storeFast(fast);
       setFastingValue("true");
+      setFastDate(fast);
+    } else {
+      checkIfEndFast();
     }
   };
 
@@ -38,11 +44,43 @@ const Home = () => {
     } catch (error) {}
   };
 
+  const storeFast = async (fast) => {
+    try {
+      await AsyncStorage.setItem("@current_fast", JSON.stringify(fast));
+    } catch (error) {}
+  };
+
+  const checkIfEndFast = () =>
+    Alert.alert("Would you like to end your current fast?", "", [
+      {
+        text: "No",
+        style: "cancel",
+      },
+      { text: "Yes", onPress: () => endFast() },
+    ]);
+
+  const endFast = async () => {
+    try {
+      await AsyncStorage.setItem("@current_fast", "");
+      setFastingValue("false");
+      setFastDate("");
+    } catch (error) {}
+  };
+
+  const checkForFast = async () => {
+    try {
+      const date = await AsyncStorage.getItem("@current_fast");
+      if (date !== null) {
+        setFastDate(JSON.parse(date));
+      }
+    } catch (error) {}
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: "#29323a" }}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={{ marginBottom: 40 }}>
-          <Timer />
+          <Timer fastDate={fastDate} />
         </View>
         <TimerButton press={timerButtonPressed} fasting={fasting} />
         <TouchableOpacity style={{ marginTop: 21 }}>

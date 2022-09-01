@@ -1,12 +1,17 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const Timer = () => {
+const Timer = ({ fastDate }) => {
   return (
-    <View>
+    <View style={{ alignItems: "center" }}>
       <Text style={styles.fastHour}>16hr</Text>
+      {fastDate !== "" ? (
+        <Text style={styles.dateDisplay}>
+          {`Your fast will end ${dayjs(fastDate).format("M/D/YYYY")} at ${dayjs(
+            fastDate
+          ).format("h:mma")}`}
+        </Text>
+      ) : null}
     </View>
   );
 };
@@ -15,7 +20,11 @@ const styles = StyleSheet.create({
   fastHour: {
     color: "#fff",
     fontSize: 45,
-    marginRight: 5,
+    marginBottom: 10,
+  },
+  dateDisplay: {
+    color: "#fff",
+    fontSize: 20,
   },
 });
 
