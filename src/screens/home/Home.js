@@ -79,12 +79,12 @@ const Home = () => {
   return (
     <View style={{ flex: 1, backgroundColor: "#29323a" }}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={{ marginBottom: 40 }}>
+        <View style={{ marginBottom: 21 }}>
           <Timer fastDate={fastDate} />
         </View>
         <TimerButton press={timerButtonPressed} fasting={fasting} />
-        <TouchableOpacity style={{ marginTop: 21 }}>
-          <Text style={styles.editFast}>Edit Fast</Text>
+        <TouchableOpacity style={{ marginTop: 18 }}>
+          <Text style={styles.editFast}>Change Fast</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

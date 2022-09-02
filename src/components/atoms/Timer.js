@@ -4,12 +4,15 @@ import { StyleSheet, Text, View } from "react-native";
 const Timer = ({ fastDate }) => {
   return (
     <View style={{ alignItems: "center" }}>
-      <Text style={styles.fastHour}>16hr</Text>
+      <Text style={styles.fast}>16:8</Text>
       {fastDate !== "" ? (
-        <Text style={styles.dateDisplay}>
-          {`Your fast will end ${dayjs(fastDate).format("M/D/YYYY")} at ${dayjs(
-            fastDate
-          ).format("h:mma")}`}
+        <Text style={styles.dateTimeWrapper}>
+          <Text style={styles.text}>Fast ends: </Text>
+          <Text style={styles.dateTime}>
+            {dayjs(fastDate).format("M/D/YYYY")}
+          </Text>
+          <Text style={styles.text}> at </Text>
+          <Text style={styles.dateTime}>{dayjs(fastDate).format("h:mma")}</Text>
         </Text>
       ) : null}
     </View>
@@ -17,14 +20,23 @@ const Timer = ({ fastDate }) => {
 };
 
 const styles = StyleSheet.create({
-  fastHour: {
+  fast: {
     color: "#fff",
-    fontSize: 45,
-    marginBottom: 10,
+    fontSize: 48,
+    fontWeight: "500",
   },
-  dateDisplay: {
+  text: {
     color: "#fff",
     fontSize: 20,
+  },
+  dateTimeWrapper: {
+    marginTop: 10,
+    marginBottom: 5,
+  },
+  dateTime: {
+    color: "#869bd3",
+    fontSize: 20,
+    fontWeight: "500",
   },
 });
 
