@@ -84,7 +84,7 @@ const Home = () => {
         </View>
         <TimerButton press={timerButtonPressed} fasting={fasting} />
         <TouchableOpacity style={{ marginTop: 18 }}>
-          <Text style={styles.editFast}>Change Fast</Text>
+          <Text style={styles.editFast}>Edit Fast</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
